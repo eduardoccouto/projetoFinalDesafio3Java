@@ -17,6 +17,7 @@ public class App {
         ArrayList<Paciente> pacientes = new ArrayList<>();
         Admin admin = new Admin();
         int controleIDS = 0;
+        int controle_exames = 0;
 
         
        while(true){
@@ -44,8 +45,10 @@ public class App {
             /*-------------------------------------------------------------------------------------------------------------------- */
             if(validador.retornaLogin(funcionarios, user_cpf) != -1){
                 if(funcionarios.get(validador.retornaLogin(funcionarios, user_cpf)).verificaPermissao("REQUISICAO")){
+                    controle_exames++;
                     Exame exame = new Exame();
-                    System.out.print("Informe o médico responsável");
+                    exame.setId_exame(controle_exames);
+                    System.out.print("Informe o médico responsável: ");
                     exame.setMed_reponsavel(br.readLine());
                     System.out.print("Informe o tipo de exame: ");
                     exame.setDesc_requerimento(br.readLine());
@@ -61,7 +64,7 @@ public class App {
                         Paciente paciente = new Paciente(paciente_nome, controleIDS, cpf_paciente);
                         exame.setPaciente(paciente);
                         pacientes.add(paciente); //VERIFICAR
-                        System.out.println("Paciente cadastrado");
+                        System.out.println("Paciente cadastrado! ");
 
                         //SETTAR O EXAME//
 
@@ -88,7 +91,7 @@ public class App {
             if(validador.retornaLogin(funcionarios, user_cpf) != -1){
                 if(funcionarios.get(validador.retornaLogin(funcionarios, user_cpf)).verificaPermissao("COLETA")){
                     System.out.println("Informe o ID do exame: ");
-                    int id_busca = br.read();
+                    int id_busca = sc.nextInt();
                     
                     int i = funcionarios.get(validador.retornaLogin(funcionarios, user_cpf)).retornaExame(exames, id_busca);
                     if(i < 0){
@@ -116,7 +119,7 @@ public class App {
             if(validador.retornaLogin(funcionarios, user_cpf) != -1){
                 if(funcionarios.get(validador.retornaLogin(funcionarios, user_cpf)).verificaPermissao("LAUDO")){
                     System.out.println("Informe o ID do exame: ");
-                    int id_busca = br.read();
+                    int id_busca = sc.nextInt();
                     
                     int i = funcionarios.get(validador.retornaLogin(funcionarios, user_cpf)).retornaExame(exames, id_busca);
                     if(i < 0){
@@ -232,32 +235,43 @@ public class App {
                             +"\n[1] REQUISIÇÃO"
                             +"\n[2] COLETA"
                             +"\n[3] LAUDO");
-                            int new_op = br.read();
+                            int new_op = sc.nextInt();
 
-                        if(new_op == 1)
-                            if(!funcionarios.get(validador.retornaLogin(funcionarios, cpf_func)).verificaPermissao("REQUISICAO"))
+                        if(new_op == 1) {
+
+                            if(funcionarios.get(validador.retornaLogin(funcionarios, cpf_func)).verificaPermissao("REQUISICAO")) {
                                 funcionarios.get(validador.retornaLogin(funcionarios, cpf_func)).removePermissao("REQUISICAO");
-                            else
+                                System.out.println("Permissão removida com sucesso!");
+                        }
+                    
+                            else {
                                  System.out.println("Funcionário não possui essa liberação.");
-                                
-                        else if(new_op == 2)
-                            if(!funcionarios.get(validador.retornaLogin(funcionarios, cpf_func)).verificaPermissao("COLETA"))
+                            } 
+                        }
+                        else if(new_op == 2){
+                            if(funcionarios.get(validador.retornaLogin(funcionarios, cpf_func)).verificaPermissao("COLETA")){
                                 funcionarios.get(validador.retornaLogin(funcionarios, cpf_func)).removePermissao("COLETA");
-                            else
+                            }
+                            else {
                                 System.out.println("Funcionário não possui essa liberação.");
-
-                        else if(new_op == 3)
-                            if(!funcionarios.get(validador.retornaLogin(funcionarios, cpf_func)).verificaPermissao("LAUDO"))
+                            }
+                        }
+                        else if(new_op == 3) {
+                            if(!funcionarios.get(validador.retornaLogin(funcionarios, cpf_func)).verificaPermissao("LAUDO")) {
                                 funcionarios.get(validador.retornaLogin(funcionarios, cpf_func)).removePermissao("LAUDO");
-                            else
+                            
+                                }    else{
                                  System.out.println("Funcionário não possui essa liberação.");
-                        else
+                                }
+                         } else {
                             System.out.println("Opção inválida");
 
                         }
+                    }
                         else{
                             System.out.println("Funcionário não existe."); 
                         }
+                        
                     break;
 
                     case 4:
