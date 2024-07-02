@@ -1,12 +1,13 @@
 public class Exame {
 
+//classe utilizada para manipulação de exames 
     private int id_exame;
     private String status;
     private String med_reponsavel;
     private String desc_requerimento;
     private String detalhe_coleta;
     private String desc_laudo;
-    private Paciente paciente;
+    private Paciente paciente; 
     
 
     public Exame() {
@@ -16,6 +17,8 @@ public class Exame {
         this.detalhe_coleta = "NÃO INFORMADO";
         this.desc_laudo = "NÃO INFORMADO";
     }
+
+    //getters e setters
     public String getMed_reponsavel() {
         return med_reponsavel;
     }

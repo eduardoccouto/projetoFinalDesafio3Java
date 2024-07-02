@@ -1,3 +1,5 @@
+//classe abstrata para tratar dados genericos
+
 public abstract class Pessoa {
     protected String nome_completo;
     protected int id;

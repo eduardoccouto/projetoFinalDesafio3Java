@@ -22,7 +22,7 @@ public class Funcionario extends Pessoa implements procuraExame, procuraExamePac
 
     
 
-    //VARIFICAR MAIS TARDE
+    
     @Override
     public String toString() {
         return "Funcionario [permissoes=" + permissoes + "]";
