@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Funcionario extends Pessoa implements procuraExame{ //TENHO RECEIO
+public class Funcionario extends Pessoa implements procuraExame, procuraExamePaciente{ 
     
     ArrayList<String> permissoes;
 
